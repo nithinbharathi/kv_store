@@ -1,0 +1,3 @@
+/Users/nithinbharathi/Projects/kv_store/build/CMakeFiles/kv_store.dir
+/Users/nithinbharathi/Projects/kv_store/build/CMakeFiles/edit_cache.dir
+/Users/nithinbharathi/Projects/kv_store/build/CMakeFiles/rebuild_cache.dir
