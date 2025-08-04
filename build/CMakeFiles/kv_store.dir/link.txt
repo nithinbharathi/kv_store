@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/cc  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.7 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/kv_store.dir/src/kv_store.o -o kv_store
