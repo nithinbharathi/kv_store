@@ -20,7 +20,7 @@ int main(){
 
        if(strcmp(command, "put") == 0){
             char *key = strtok(NULL, " ");
-            char *val = strtok(NULL, " ");
+            char *val = strtok(NULL, "");
 
             if(key == NULL || val == NULL){
                 fprintf(stderr, "Key or value cannot NULL\n");
