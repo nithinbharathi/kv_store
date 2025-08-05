@@ -6,7 +6,7 @@
 #include<ctype.h>
 #include "hash.h"
 
-#define BUFFER_SIZE 8U
+#define BUFFER_SIZE 16384U // should always be a power of 2 to support & instead of %
 
 struct node *store[BUFFER_SIZE];
 
@@ -31,7 +31,7 @@ void put(const char *key, const char *val){
 }
 
 char* get(const char *key){
-    int ind = hash(key)%BUFFER_SIZE;
+    int ind = hash(key)&(BUFFER_SIZE-1);
     struct node *curr = store[ind];
 
     while(curr != NULL){
