@@ -3,6 +3,8 @@
 #include<time.h>
 #include<stdio.h>
 #include<string.h>
+#include "utils.h"
+#include "wal.h"
 
 const size_t key_len = 64, val_len = 128;
 
@@ -27,7 +29,7 @@ void benchmark_put(char key[][key_len+1], char val[][val_len+1], int epochs){
         time_taken += ((end.tv_nsec - start.tv_nsec) + (end.tv_sec - start.tv_sec))/1e9;
     }
 
-    printf("avg time for put invoked %d times %.6f\n", ops, time_taken/ops);
+    printf("avg time for put invoked %d times %.6f\n", epochs, time_taken/epochs);
 }
 
 void benchmark_get(char key[][key_len+1], int epochs){
@@ -42,7 +44,7 @@ void benchmark_get(char key[][key_len+1], int epochs){
         time_taken += ((end.tv_nsec - start.tv_nsec) + (end.tv_sec - start.tv_sec))/1e9;
     }
 
-    printf("avg time for get invoked %d times %.6f\n", ops, time_taken/ops);
+    printf("avg time for get invoked %d times %.6f\n", epochs, time_taken/epochs);
 }
 
 int main(){
@@ -55,6 +57,8 @@ int main(){
         get_random_str(vals[i], val_len);
     }
 
-    benchmark_put(keys, vals, epochs);
+    //benchmark_put(keys, vals, epochs);
+
+
     return 0;
 }
