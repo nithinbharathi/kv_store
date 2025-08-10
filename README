@@ -28,7 +28,8 @@ The following operations (case insensitive) are supported:
 
 - PUT key value
 - GET key
-- PRINT<br>
+- PRINT
 
+<br>
 
 ![](kv_store.png)
