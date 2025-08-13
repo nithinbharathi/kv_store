@@ -50,7 +50,7 @@ The following operations (case insensitive) are supported:
 ## Implementation details
 
 ### In-Memory hash table
-- Extremely fast lookups but collisions are unavoidable. Chaining was chosen for hash collision resolution after evaluating various alternatives (linear probing, Robin Hood hashing, cuckoo hashing). While other methods can offer faster lookups, chaining provides the best balance of simplicity, predictable performance across all operations, and ease of debugging.
+- Extremely fast lookups but collisions are unavoidable. Chaining was chosen for hash collision resolution after evaluating various alternatives (linear/quadratic probing, Robin Hood hashing, cuckoo hashing). While other methods can offer faster lookups, chaining provides the best balance of simplicity, predictable performance across all operations, and ease of debugging.
 
 - **Hash Function Choice**: DJB2 was chosen for its simplicity, good distribution for small workloads and seemingly random outputs for varied inputs. More robust non-cryptographic hash functions such as MurmurHash, FarmHash, or CityHash provide better distribution and lower collision probability on large datasets. These are planned for future integration to improve scalability and uniformity in key distribution.
 
