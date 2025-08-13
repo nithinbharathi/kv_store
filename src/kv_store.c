@@ -11,7 +11,7 @@
 struct node *store[BUFFER_SIZE];
 
 void put(const char *key, const char *val){
-    uint32_t ind = hash(key)%BUFFER_SIZE;
+    uint32_t ind = hash(key) & (BUFFER_SIZE-1);
     struct node *curr = store[ind];
 
     while(curr != NULL){
@@ -31,7 +31,7 @@ void put(const char *key, const char *val){
 }
 
 char* get(const char *key){
-    int ind = hash(key)&(BUFFER_SIZE-1);
+    uint32_t ind = hash(key)&(BUFFER_SIZE-1);
     struct node *curr = store[ind];
 
     while(curr != NULL){
