@@ -64,7 +64,11 @@ int main(){
     read_wal();
     char res[1024];
     char line[] = "GET tfgef";
-    parse(line, res, false);
+    //parse(line, res, false);
+
+    print(res, sizeof(res));
+    printf("%s",res);
+    printf("%lu",sizeof(res));
     
 
     return 0;

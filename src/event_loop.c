@@ -36,7 +36,7 @@ void event_loop() {
 
     struct sockaddr_in addr;
     char buf[BUF_SIZE];
-    char response[BUF_SIZE];
+    char response_buf[BUF_SIZE];
 
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
     addr.sin_family = AF_INET;
@@ -77,8 +77,8 @@ void event_loop() {
                 else { 
                     buf[n] = '\0'; 
                     buf[strcspn(buf, "\r\n")] = '\0'; 
-                    parse(buf, response, true);
-                    write(client_fd, response, strlen(response));
+                    parse(buf, response_buf, sizeof(response_buf), true);
+                    write(client_fd, response_buf, strlen(response_buf));
                 }
             }
         }

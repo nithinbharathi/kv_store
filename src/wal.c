@@ -59,8 +59,8 @@ void read_wal(){
     char line[1024];
     while(fgets(line, sizeof(line), fp)){
         line[strcspn(line,"\n")] = '\0';
-        char response_buffer[1024];
-        parse(line, response_buffer, false);
+        char response_buf[1024];
+        parse(line, response_buf, sizeof(response_buf), false);
     }
     fclose(fp);
 }
