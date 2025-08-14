@@ -65,6 +65,6 @@ The following operations (case insensitive) are supported:
 
 ![](kv_store.png)
 
-##References
+## References
 - [Redis persistence](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/)
 - [Memcache](https://research.facebook.com/publications/scaling-memcache-at-facebook/)
