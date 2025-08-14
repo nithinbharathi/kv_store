@@ -9,6 +9,7 @@
 #include <signal.h>
 #include "event_loop.h"
 #include "parse.h"
+#include "wal.h"
 
 #define PORT 12345
 #define MAX_CLIENTS 10
@@ -16,6 +17,7 @@
 
 int server_fd;
 int clients[MAX_CLIENTS];
+
 
 void handle_sigint(int sig) {
     printf("\nServer shutting down...\n");
@@ -25,6 +27,7 @@ void handle_sigint(int sig) {
     }
 
     if (server_fd > 0) close(server_fd);
+    wal_close();
     exit(0);
 }
 
@@ -74,7 +77,7 @@ void event_loop() {
                 else { 
                     buf[n] = '\0'; 
                     buf[strcspn(buf, "\r\n")] = '\0'; 
-                    strcpy(response, parse(buf));
+                    parse(buf, response);
                     write(client_fd, response, strlen(response));
                 }
             }

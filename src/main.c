@@ -1,12 +1,12 @@
 #include<stdio.h>
-#include "utils.h"
+#include "wal.h"
 #include "event_loop.h"
 
 
 int main(){
     printf("***********************************************************************************\n"); 
-    create_directory(get_dir_path());
+    wal_init();
     event_loop();
-    
+
     return 0;
 }
