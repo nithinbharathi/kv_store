@@ -7,9 +7,10 @@
 #include <stdbool.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "parse.h"
 
 void start_wal_thread();
-void stop_wal_thread();
+void read_wal();
 
 #define BUF_SIZE 1024
 
@@ -33,6 +34,7 @@ void wal_init() {
     if (wal_fd == -1) {
         perror("Failed to open WAL file");
     }
+    read_wal();
     start_wal_thread();
 }
 
@@ -54,10 +56,11 @@ void read_wal(){
         return;
     }
 
-    char line[100];
+    char line[1024];
     while(fgets(line, sizeof(line), fp)){
         line[strcspn(line,"\n")] = '\0';
-        printf("command read: %s\n", line);
+        char response_buffer[1024];
+        parse(line, response_buffer, false);
     }
     fclose(fp);
 }

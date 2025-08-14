@@ -9,8 +9,9 @@
 #include <unistd.h>
 #include<stdlib.h>
 #include "wal.h"
+#include<stdbool.h>
 
-void parse(char *line, char *buf){
+void parse(char *line, char *buf, bool add_to_log){
     char line_copy[1024];
     strcpy(line_copy, line);
     char *command = strtok(line," ");
@@ -20,10 +21,12 @@ void parse(char *line, char *buf){
         char *key = strtok(NULL, " ");
         char *val = strtok(NULL, "");
 
+
+
         if(key == NULL || val == NULL){
             snprintf(buf, sizeof(buf), "Key or value cannot be NULL\n");
         } else {
-            add_entry(line_copy);
+            if(add_to_log)add_entry(line_copy);
             put(key,val);
             snprintf(buf, sizeof(buf), "added\n");
         }

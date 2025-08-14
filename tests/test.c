@@ -6,6 +6,7 @@
 #include "utils.h"
 #include "wal.h"
 #include <unistd.h>
+#include "parse.h"
 
 const size_t key_len = 64, val_len = 128;
 
@@ -59,10 +60,12 @@ int main(){
     }*/
 
     //benchmark_put(keys, vals, epochs);
-
-    wal_init();
-    add_entry("PUT def abc");
-    add_entry("get abc");
+    extern void read_wal(); 
+    read_wal();
+    char res[1024];
+    char line[] = "GET tfgef";
+    parse(line, res, false);
+    
 
     return 0;
 }

@@ -77,7 +77,7 @@ void event_loop() {
                 else { 
                     buf[n] = '\0'; 
                     buf[strcspn(buf, "\r\n")] = '\0'; 
-                    parse(buf, response);
+                    parse(buf, response, true);
                     write(client_fd, response, strlen(response));
                 }
             }
