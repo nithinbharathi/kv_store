@@ -8,7 +8,7 @@
 #include "utils.h"
 #include <unistd.h>
 
-void parse(int client_fd, char *line){
+char* parse(char *line){
     char *command = strtok(line," ");
     to_lower(command);
 
@@ -40,5 +40,5 @@ void parse(int client_fd, char *line){
         snprintf(buf, sizeof(buf), "invalid command\n");
     }
 
-    write(client_fd, buf, strlen(buf));
+    return buf;
 }

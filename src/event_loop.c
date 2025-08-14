@@ -33,6 +33,7 @@ void event_loop() {
 
     struct sockaddr_in addr;
     char buf[BUF_SIZE];
+    char response[BUF_SIZE];
 
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
     addr.sin_family = AF_INET;
@@ -70,7 +71,12 @@ void event_loop() {
             if (clients[i] > 0 && FD_ISSET(clients[i], &read_fds)) {
                 int n = read(clients[i], buf, BUF_SIZE);
                 if (n <= 0) { close(clients[i]); clients[i] = -1; }
-                else { buf[n] = '\0'; buf[strcspn(buf, "\r\n")] = '\0'; parse(clients[i], buf); }
+                else { 
+                    buf[n] = '\0'; 
+                    buf[strcspn(buf, "\r\n")] = '\0'; 
+                    strcpy(response, parse(buf));
+                    write(client_fd, response, strlen(response));
+                }
             }
         }
     }
