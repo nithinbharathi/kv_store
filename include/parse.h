@@ -1,4 +1,5 @@
+#include<stdbool.h>
 #ifndef _PARSE_H_
 #define _PARSE_H_
-void parse(int client_fd, char *line);
+void parse(char *line, char *buf, bool add_to_log);
 #endif

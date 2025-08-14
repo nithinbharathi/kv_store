@@ -5,6 +5,8 @@
 #include<string.h>
 #include "utils.h"
 #include "wal.h"
+#include <unistd.h>
+#include "parse.h"
 
 const size_t key_len = 64, val_len = 128;
 
@@ -52,13 +54,18 @@ int main(){
     char keys[epochs][key_len+1], vals[epochs][val_len+1];
     srand(time(NULL));
 
-    for(int i = 0;i<epochs;i++){
+    /*for(int i = 0;i<epochs;i++){
         get_random_str(keys[i], key_len);
         get_random_str(vals[i], val_len);
-    }
+    }*/
 
     //benchmark_put(keys, vals, epochs);
-
+    extern void read_wal(); 
+    read_wal();
+    char res[1024];
+    char line[] = "GET tfgef";
+    parse(line, res, false);
+    
 
     return 0;
 }
