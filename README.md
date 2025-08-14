@@ -6,7 +6,7 @@ This project is a learning-oriented yet functional implementation of a minimal d
 
 ## Features
 - In-memory storage for fast access
-- Write-Ahead Logging (WAL) to persist changes and recover from crashes
+- Append-only file (AOF) to persist changes and recover from crashes
 - Event loop for serving commands from multiple remote clients over TCP without blocking
 - Case-insensitive command parsing
 
@@ -17,16 +17,16 @@ This project is a learning-oriented yet functional implementation of a minimal d
 
 - **Hash Function Choice**: DJB2 was chosen for its simplicity, good distribution for small workloads and seemingly random outputs for varied inputs. More robust non-cryptographic hash functions such as MurmurHash, FarmHash, or CityHash provide better distribution and lower collision probability on large datasets. These are planned for future integration to improve scalability and uniformity in key distribution.
 
-### Write-Ahead logging (WAL)
-- Every modifying command (PUT) is first appended to a log file before updating the in-memory table.
+### Buffered Append-Only File (AOF)
+- Every modifying command (PUT) is first appended to an in memory log buffer which is flushed to disk every 5 secs.
 - fsync system call is used to ensure data is physically written to disk, not just sitting in the OS cache.
-- Replaying the commands in the log will help to restore the exact state before a failure
-- However, the downside is that the log grows indefinitely. Periodic snapshotting is planned for future implementation to compact the log.
+- Replaying the commands in the log will help to restore the exact state after a crash/failure.
+- However, the downside is that the log grows indefinitely. Periodic snapshotting is planned for future implementation. This helps in executing only the commands after the snaphot was taken. (allowing for hybrid approach similar to redis)
 
 ### Event Loop
 - Chose a single threaded non-blocking event loop to handle multiple client connections without the complexity of having to manage multiple threads.
 - Reduces compute load - small, simple, and efficient for a lightweight store.
-- Uses TCP sockets for reliable communication.
+- Uses TCP sockets for all requests (GET, PUT, PRINT) for reliable communication. However, UDP connection can be used for GET/PRINT requests (similar to memcache) to reduce latency. This is yet to be implemented.
 
 ## Installation
 
@@ -64,3 +64,7 @@ The following operations (case insensitive) are supported:
 <br>
 
 ![](kv_store.png)
+
+##References
+- [Redis persistence](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/)
+- [Memcache](https://research.facebook.com/publications/scaling-memcache-at-facebook/)
