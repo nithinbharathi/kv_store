@@ -44,15 +44,24 @@ char* get(const char *key){
     return NULL;
 }
 
-void print(){
-    printf("KEYS\t\tVALUES\n");
+void print(char* buf, size_t sz){
+    size_t offset = 0;
+    int written = snprintf(buf+offset,sz-offset, "Keys:\t\t\t\tValues:\n_______________________________________\n");
     for(int i = 0;i<BUFFER_SIZE;i++){
         if(store[i]){
             struct node *curr = store[i];
             while(curr != NULL){
-                printf("%s \t\t %s\n", curr->key, curr->val);
+                offset += written;
+                written = snprintf(buf+offset,sz-offset, "%s\t\t\t\t%s\n",curr->key, curr->val);
+                if (written < 0 || (size_t)written >= sz - offset) {
+                    goto done; 
+                }
+                
                 curr = curr->next;
             }
         }
     }
+
+    done:
+    buf[offset] = '\0';
 }
