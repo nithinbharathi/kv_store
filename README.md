@@ -26,7 +26,7 @@ This project is a learning-oriented yet functional implementation of a minimal d
 ### Event Loop
 - Chose a single threaded non-blocking event loop to handle multiple client connections without the complexity of having to manage multiple threads.
 - Reduces compute load - small, simple, and efficient for a lightweight store.
-- Uses TCP sockets for all requests (GET, PUT, PRINT) for reliable communication. However, UDP connection can be used for GET/PRINT requests (similar to memcache) to reduce latency. This is yet to be implemented.
+- Uses TCP sockets for all requests (GET, PUT, PRINT) for reliable communication. However, UDP connection can be used for GET/PRINT requests (similar to memcached) to reduce latency. This is yet to be implemented.
 
 ## Installation
 
@@ -67,4 +67,4 @@ The following operations (case insensitive) are supported:
 
 ## References
 - [Redis persistence](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/)
-- [Memcache](https://research.facebook.com/publications/scaling-memcache-at-facebook/)
+- [Scaling Memcache](https://research.facebook.com/publications/scaling-memcache-at-facebook/)
